@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 //import '../styles/Main.css';
-import HeaderWithSearch from './header'
+import SearchInput from './search-input'
 
 class Main extends Component {
 
 	componentDidMount() {
-		const { fetching } = this.props
+		const { fetching, searching } = this.props
 		fetch("http://api.shopstyle.com/api/v2/categories?pid=uid4961-26577031-68")
 			.then(response => response.json())
-			.then(resJson => fetching(resJson.categories))
+			.then(resJson => {fetching(resJson.categories); searching(resJson.categories)})
 
 	}
 	render() {
-		const searchItems = this.props.searchItem
-		const categories = this.props.categories
-		//console.log('categeries', categories)
+		const { searchItem=[] } = this.props
+
 		return (
       <div className="wrapper">
 			<header>
 				<SearchInput {...this.props}/>
 			</header>
-			 <ul>{
-				 	searchItems.length>0
-					? searchItems.map((item,i) => <li key={i}>{item.shortName}</li>)
-					: categories.map((item,i) => <li key={i}>{item.shortName}</li>)
-			 }</ul>
+			 <ol>{
+				 	searchItem.length>0
+					? searchItem.map((item,i) => <li key={i}>{item.shortName}</li>)
+					: false
+			 }</ol>
       </div>
     );
   }

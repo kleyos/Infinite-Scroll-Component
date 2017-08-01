@@ -3,21 +3,17 @@ import React, { Component } from 'react'
 class SearchInput extends Component {
 
 	handleSearch(){
-	const value = this.searchInput.value
-	console.log('value', value)
-	const categories = this.props.data
-	const searching = this.props.searching
+	const { categories=[], searching } = this.props
 
-	const searchCategories = categories
-	? categories.filter(item => {
+	const value = this.searchInput.value
+	const searchCategories = categories.filter(item => {
 			if (!value) {
-				return true
+				return false
 			}
 			const regex = new RegExp(value, 'gi');
 			return item.shortName.match(regex)
 		})
-	: false
-
+	console.log('searchCategories', searchCategories)
 	searching(searchCategories)
 	}
 
