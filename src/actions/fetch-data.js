@@ -6,3 +6,12 @@ export function fetching(data) {
 		})
 	}
 }
+export function fetchingProdacts(data) {
+
+	return (dispatch) => {
+		dispatch({
+			type: 'FETCH_PROD',
+			data
+		})
+	}
+}

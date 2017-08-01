@@ -6,11 +6,13 @@ import { Provider } from 'react-redux';
 
 import store, { history } from './store'
 
-import App from './components/App';
+import CategoriesContainer from './containers/CategoriesContainer';
+import ProdactsContainer from './containers/ProdactsContainer'
 
 const app = <Provider store={store}>
 	<Router history={history}>
-		<Route path="/" component={App} />
+		<Route path="/" component={CategoriesContainer} />
+		<Route path=':cat' component={ProdactsContainer}/>
 	</Router>
 </Provider>
 
